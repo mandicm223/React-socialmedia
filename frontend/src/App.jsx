@@ -1,11 +1,18 @@
 import { useState } from 'react'
 import reactLogo from './assets/react.svg'
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import Login from './components/Login';
+import Home from './container/Home';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const App = () => {
   return (
-    <div className="underline text-5xl">
-      <h1>Vite + React</h1>
-    </div>
+    <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_API_TOKEN}>
+      <Routes>
+        <Route path='/login' element={<Login />} />
+        <Route path='/*' element={<Home />} />
+      </Routes>
+    </GoogleOAuthProvider>
   )
 }
 
