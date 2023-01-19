@@ -13,6 +13,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const createOrGetUser = ( response ) => {
+    localStorage.setItem('user', JSON.stringify(jwt_decode(response.credential)));
     const { sub, name, picture} = jwt_decode(response.credential)
     
     const doc = {
