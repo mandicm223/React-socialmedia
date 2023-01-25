@@ -17,6 +17,30 @@ const PinDetail = ({ user }) => {
 
   const { pinId } = useParams();
 
+  const addComment = () => {
+    if (comment) {
+      setAddingComment(true)
+      
+      client.patch(pinId)
+        .setIfMissing({ comments: []})
+        .insert('after', 'comments[-1]' , [{ 
+          comment, 
+          _key: uuidv4(),
+          postedBy: {
+            _type: 'postedBy',
+            _ref: user._id
+          }
+      }])
+      .commit()
+      .then(() => {
+        fetchPinDetais();
+        setComment('');
+        setAddingComment(false)
+      })
+    }
+  };
+
+
   const fetchPinDetais = () => {
     let query = pinDetailQuery(pinId)
 
@@ -83,10 +107,10 @@ const PinDetail = ({ user }) => {
       </Link>
       <h2 className='mt-5 text-wxl'>Comments</h2>
       <div className='max-h-370 overflow-y-auto'>
-        {pinDetail?.comments?.map((comment, i) => {
-          <div className='flex gap-2 mt-5 items-center bg-white rounded-lg' key={i}> 
+        {pinDetail?.comments?.map((comment) => (
+          <div className='flex gap-2 mt-5 items-center bg-white rounded-lg' key={comment.comment}> 
             <img 
-              src={comment.postedBy.image}
+              src={comment.postedBy?.image}
               alt="user-profile"
               className='w-10 h-10 rounded-full cursor-pointer'
             />
@@ -97,7 +121,30 @@ const PinDetail = ({ user }) => {
               <p>{comment.comment}</p>
             </div>
           </div>
-        })}
+        ))}
+      </div>
+      <div className='flex flex-wrap mt-6 gap-3'>
+        <Link to={`user-profile/${pinDetail.postedBy?._id}`}>
+            <img 
+              className='w-10 h-10 rounded-full cursor-pointer'
+              src={pinDetail.postedBy?.image}
+              alt="user=profile"
+            />
+        </Link>
+        <input
+          className='flex-1 border-gray-100 outline-none border-2 p-2 rounded-2xl focus:border-gray-300'
+          type="text" 
+          placeholder='Add a comment'
+          value={comment.comment}
+          onChange={(e) => setComment(e.target.value)}
+        />
+        <button
+          type="button"
+          onClick={addComment}
+          className="bg-red-500 text-white font-semibold text-base rounded-full outline-none px-6 py-2"
+        >
+          {addingComment ? 'Posting the comment...' : 'Post'}
+        </button>
       </div>
       </div>
     </div>
