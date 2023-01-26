@@ -157,7 +157,9 @@ const PinDetail = ({ user }) => {
         <MasonryLayout pins={pins}/>
       </>
     ): (
-      <Spinner message="Loading some more juicy content"/>
+      <div className='py-6'>
+        <Spinner message="Loading some more juicy content"/>
+      </div>
     )}
     </>
   )

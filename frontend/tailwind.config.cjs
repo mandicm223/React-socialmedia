@@ -50,6 +50,21 @@ module.exports = {
         blackOverlay: 'rgba(0, 0 ,0 ,0.7)',
       },
       keyframes: {
+        'animate-gradient-1': {
+          '0%, 16.667%, 100%': { opacity: '1' },
+          '33.333%, 83.333%': { opacity: '0' },
+        },
+
+        'animate-gradient-2': {
+          '0%, 16.667%, 66.667%, 100%': { opacity: '0' },
+          '33.333%, 50%': { opacity: '1' },
+        },
+
+        'animate-gradient-3': {
+          '0%, 50%,  100%': { opacity: '0' },
+          '66.667%, 83.333%': { opacity: '1' },
+        },
+
         'slide-in': {
           '0%': {
             '-webkit-transform': 'translateX(-200px)',
@@ -75,6 +90,9 @@ module.exports = {
       animation: {
         'slide-in': 'slide-in 0.5s ease-out',
         'slide-fwd': ' slide-fwd 0.45s cubic-bezier(0.250, 0.460, 0.450, 0.940) both',
+        'gradient-1': 'animate-gradient-1 8s infinite',
+        'gradient-2': 'animate-gradient-2 8s infinite',
+        'gradient-3': 'animate-gradient-3 8s infinite',
       },
       transitionProperty: {
         height: 'height',

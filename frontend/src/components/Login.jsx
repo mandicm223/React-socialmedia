@@ -43,9 +43,16 @@ const Login = () => {
         />
 
         <div className="absolute flex flex-col justify-center items-center top-0 right-0 left-0 bottom-0    bg-blackOverlay">
+        <h1 class="flex flex-col gap-2 text-center text-6xl font-black md:flex-row lg:tracking-tight xl:text-9xl">
+          <span class="before:absolute before:-z-10 before:text-black before:content-[attr(data-text)]" data-text="Develop."><span class="animate-gradient-1 bg-gradient-to-r from-indigo-500 to-blue-500 bg-clip-text text-transparent">Share</span> </span>
+
+          <span class="before:absolute before:-z-10 before:text-black before:content-[attr(data-text)]" data-text="Preview."><span class="animate-gradient-2 bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent"> great</span> </span>
+
+          <span class="before:absolute before:-z-10 before:text-black before:content-[attr(data-text)]" data-text="Ship."><span class="animate-gradient-3 bg-gradient-to-r from-fuchsia-600 to-purple-600 bg-clip-text text-transparent">moments.</span> </span>
+        </h1>
           <div className="p-5">
             <img src={logo} width="130px" />
-          </div>
+        </div>
 
           <div className="shadow-2xl">
             <GoogleLogin
